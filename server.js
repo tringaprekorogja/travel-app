@@ -40,13 +40,13 @@ app.post('/addNewEntry', postData);
 
 function postData(request, respond) {
 
-   projectData = {
+    projectData = {
 
         temperature: request.body.temperature,
         date: request.body.date,
         feelings: request.body.feelings
     }
-    
+
     console.log('data is ' + projectData)
-    respond.send (projectData)
+    respond.send(projectData)
 }

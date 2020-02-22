@@ -1,6 +1,6 @@
 /* Global Variables */
 let baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
-let apiKey = '&appid=14e5fab081a0a0e66ac8bde37f7ec984';
+let apiKey = '&appid=14e5fab081a0a0e66ac8bde37f7ec984&units=metric';
 const newZip = document.getElementById('zip').value;
 
 
@@ -16,9 +16,10 @@ function performAction(e) {
     getWeather(baseURL, newZip, apiKey)
         .then(function (data) {
             postData('http://localhost:3000/addNewEntry', { temperature: data.main.temp, date: newDate, feelings: feelings })
-            updateUI()
         })
-
+        .then(
+            updateUI()
+        )
 }
 const getWeather = async (baseURL, zip, key) => {
     const res = await fetch(baseURL + zip + key)
@@ -55,9 +56,9 @@ const updateUI = async () => {
     const request = await fetch('http://localhost:3000/allEntries');
     try {
         const allData = await request.json();
-        document.getElementById('temp').innerHTML = 'Temp: ' + allData.temperature;
+        document.getElementById('temp').innerHTML = 'Temp: ' + allData.temperature + ' °C';
         document.getElementById('date').innerHTML = 'Date: ' + allData.date;
-        document.getElementById('content').innerHTML = 'Feeling ' + allData.feelings;
+        document.getElementById('content').innerHTML = 'Feeling ' + allData.feelings + '.';
 
     } catch (error) {
         console.log("error", error);

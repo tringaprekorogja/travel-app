@@ -17,7 +17,7 @@ body{
 }
 
 .holder{
-
+ 
 }
 
 .entry{
@@ -25,7 +25,7 @@ body{
 }
 
 #entryHolder{
-
+ 
 }
 
 #date{
@@ -46,6 +46,7 @@ body{
 .title{
 
 }
+
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
 label{
@@ -109,3 +110,12 @@ button:focus {
     font-family: 'Oswald', sans-serif;
 
 } 
+
+@media(min-width:375px) and (max-width:900px) {
+    #app {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding: 50px;
+    }
+}
