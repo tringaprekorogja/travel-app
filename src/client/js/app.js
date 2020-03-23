@@ -8,7 +8,9 @@ const newZip = document.getElementById('zip').value;
 let d = new Date();
 let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
 
-document.getElementById('generate').addEventListener('click', performAction);
+function eventListener() {
+    document.getElementById('generate').addEventListener('click', performAction);
+}
 
 function performAction(e) {
     const newZip = document.getElementById('zip').value;
@@ -64,3 +66,6 @@ const updateUI = async () => {
         console.log("error", error);
     }
 }
+
+export {performAction,
+        eventListener};
