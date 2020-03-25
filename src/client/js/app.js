@@ -8,16 +8,17 @@ const newZip = document.getElementById('zip').value;
 let d = new Date();
 let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
 
-function eventListener() {
-    document.getElementById('generate').addEventListener('click', performAction);
-}
+
+ document.getElementById('generate').addEventListener('click',performAction);
+
 
 function performAction(e) {
+    console.log('ej')
     const newZip = document.getElementById('zip').value;
     const feelings = document.getElementById('feelings').value;
     getWeather(baseURL, newZip, apiKey)
         .then(function (data) {
-            postData('http://localhost:3000/addNewEntry', { temperature: data.main.temp, date: newDate, feelings: feelings })
+            postData('http://localhost:8081/addNewEntry', { temperature: data.main.temp, date: newDate, feelings: feelings })
         })
         .then(
             updateUI()
@@ -55,7 +56,7 @@ const postData = async (url = '', data = {}) => {
 }
 
 const updateUI = async () => {
-    const request = await fetch('http://localhost:3000/allEntries');
+    const request = await fetch('http://localhost:8081/allEntries');
     try {
         const allData = await request.json();
         document.getElementById('temp').innerHTML = 'Temp: ' + allData.temperature + ' °C';
@@ -67,5 +68,4 @@ const updateUI = async () => {
     }
 }
 
-export {performAction,
-        eventListener};
+export {performAction};
