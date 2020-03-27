@@ -1,7 +1,7 @@
 /* Global Variables */
 let baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
 let apiKey = '&appid=14e5fab081a0a0e66ac8bde37f7ec984&units=metric';
-const newZip = document.getElementById('zip').value;
+const newZip = document.getElementById('city').value;
 
 
 // Create a new date instance dynamically with JS
@@ -9,13 +9,13 @@ let d = new Date();
 let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
 
 
- document.getElementById('generate').addEventListener('click',performAction);
+ document.getElementById('search').addEventListener('click',performAction);
 
 
 function performAction(e) {
     console.log('ej')
-    const newZip = document.getElementById('zip').value;
-    const feelings = document.getElementById('feelings').value;
+    const newZip = document.getElementById('city').value;
+    const feelings = document.getElementById('departing-date').value;
     getWeather(baseURL, newZip, apiKey)
         .then(function (data) {
             postData('http://localhost:8081/addNewEntry', { temperature: data.main.temp, date: newDate, feelings: feelings })

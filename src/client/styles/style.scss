@@ -1,73 +1,73 @@
 body{
+    padding: 100px;
     background: #fffff8;
+    border:solid black;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-body {
     display: grid;
-    grid-template-rows: 50px repeat(4,1fr);
-    grid-row-gap:50px;
+    grid-template-columns:1fr 1fr (1fr,auto);
+    grid-template-rows:1fr 2fr 2f 1fr 2fr 1fr ;
+    grid-row-gap:30px;
     grid-template-areas: 
-    "hd"
-    "dest"
-    "depart"
-    "search"
-    "weather"
-    "places";
+    "hd hd hd"
+    "city city city"
+    "date date date"
+    "search search search"
+    "travel travel travel"
+    "photo photo photo";
 }
 
 header{
     grid-area:hd;
-    padding-left:600px;
+    text-align: center;
+}
+
+.title {
+    text-align: center;
 }
 
 #departing {
-    grid-area: depart;
+    grid-area: date;
 }
 #destination {
-    grid-area: dest;
+    grid-area: city;
 }
 #search {
     grid-area:search;
-    width: 400px ;
+    width: 230px ;
 }
 #travelInfo {
-    grid-area: weather;
+    grid-area: travel;
+}
+#mostVisited{
+   
+    #images {
+        grid-area: photo;
+        display:flex;
+        justify-content: space-between;
+       
+        img {
+            width: 350px;
+            height: 200px;
+            }       
+            
+        }
 }
 
-#images {
-    grid-area: places;
-    display: flex;
-    justify-content: space-evenly;
-    img {
-        width: 350px;
-        height: 200px;
-    }
     
-    
-}
-
-#city {
-    width:300px;
-    height:60px;
-}
-#departing-date {
-     width:300px;
-    height:60px;
-}
 
 
 
 
 
-/*  Basic Styling To Override Default For Basic HTML Elements */
+
+
+
+
+
+
 
 
 @media(min-width:375px) and (max-width:900px) {
-    #app {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        padding: 50px;
-    }
+  
+  
 }
