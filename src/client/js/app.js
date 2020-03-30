@@ -1,7 +1,7 @@
 /* Global Variables */
-let baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
-let apiKey = '&appid=14e5fab081a0a0e66ac8bde37f7ec984&units=metric';
-const newZip = document.getElementById('city').value;
+let baseURL = 'http://api.geonames.org/postalCodeSearchJSON?placename=';
+let userName = '&username=tringa';
+const city = document.getElementById('city').value;
 
 
 // Create a new date instance dynamically with JS
@@ -9,23 +9,34 @@ let d = new Date();
 let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
 
 
+
  document.getElementById('search').addEventListener('click',performAction);
 
 
 function performAction(e) {
-    console.log('ej')
-    const newZip = document.getElementById('city').value;
-    const feelings = document.getElementById('departing-date').value;
-    getWeather(baseURL, newZip, apiKey)
+
+    const city = document.getElementById('city').value;
+    const date = document.getElementById('departing-date').value
+    let tripDate = new Date(date).getTime();
+    let now = new Date().getTime();
+    let t = tripDate - now;
+    const days = Math.floor(t / (1000 * 60 * 60 * 24));
+    console.log(days);
+    
+    
+
+    
+    getCityInfo(baseURL, city, userName)
         .then(function (data) {
-            postData('http://localhost:8081/addNewEntry', { temperature: data.main.temp, date: newDate, feelings: feelings })
+           console.log(data.postalCodes[0].countryCode);
+           postData('http://localhost:8081/addNewEntry', { Country: data.postalCodes[0].countryCode, Latitude: data.postalCodes[0].lat, Longitude: data.postalCodes[0].lng})
         })
         .then(
             updateUI()
         )
 }
-const getWeather = async (baseURL, zip, key) => {
-    const res = await fetch(baseURL + zip + key)
+const getCityInfo = async (baseURL, city, userName) => {
+    const res = await fetch(baseURL + city + userName)
     try {
         const data = await res.json();
         console.log(data)

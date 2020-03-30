@@ -42,9 +42,9 @@ function postData(request, respond) {
 
     projectData = {
 
-        temperature: request.body.temperature,
-        date: request.body.date,
-        feelings: request.body.feelings
+        Country: request.body.Country,
+        Latitude: request.body.Latitude,
+        Longitude: request.body.Longitude,
     }
 
     console.log('data is ' + projectData)

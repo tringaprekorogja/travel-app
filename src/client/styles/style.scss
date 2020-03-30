@@ -1,7 +1,6 @@
 body{
     padding: 60px;
-    background: #fffff8;
-    
+    background: #fffff8;  
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     display: grid;
     grid-template-columns:1fr 1fr 1fr;
@@ -40,6 +39,7 @@ header{
        height: 40px;
     }
 }
+
 #destination {
     grid-area: city;
     #city {
@@ -61,6 +61,7 @@ header{
 #travelInfo {
     grid-area: travel;
 }
+
 #mostVisited{
     grid-area: photo;
      width:100%;
