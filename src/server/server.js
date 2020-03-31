@@ -44,7 +44,6 @@ app.post('/trip/weather', (req, res) => {
                 return res.status(500).json({ type: 'error', message: err.message });
             }
             res.json(JSON.parse(body));
-            console.log('hej')
         }
     )
 });
