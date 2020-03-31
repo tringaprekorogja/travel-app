@@ -1,13 +1,17 @@
 /* Global Variables */
 let baseURL = 'http://api.geonames.org/postalCodeSearchJSON?placename=';
 let userName = '&username=tringa';
-let darkSkyUrl ='https://api.darksky.net/forecast/';
-let darkSkyKey ='13906ff7d642fd620e83783e917d200f/';
+let darkSkyUrl = 'https://api.darksky.net/forecast/';
+let darkSkyKey = '13906ff7d642fd620e83783e917d200f/';
+let pixabayUrl = 'https://pixabay.com/api/'
+let pixabayKey = '?key=15825235-241d1f472909d09f4e952d861'
+
+
 
 const city = document.getElementById('city').value;
 
 
- document.getElementById('search').addEventListener('click',performAction);
+document.getElementById('search').addEventListener('click', performAction);
 
 
 function performAction(e) {
@@ -20,33 +24,42 @@ function performAction(e) {
     const t = tripDate - now;
     const days = Math.floor(t / (1000 * 60 * 60 * 24)) + 1;
     console.log(days);
-    
 
 
-    
+
+
     getCityInfo(baseURL, city, userName)
         .then(function (data) {
-           const latitude = data.postalCodes[0].lat;
-           const longitude = data.postalCodes[0].lng;
-           getCityWeather ('http://localhost:8081/trip/weather', data = { url: darkSkyUrl + darkSkyKey + latitude + ',' + longitude + ',' + tripDate/1000})    
-           .then(function (data) {     
-            document.getElementById('days').innerHTML = city + ',' + ' is ' + days + ' days away'
-            if (days<=7) {
-                document.getElementById('weather').innerHTML = 'The weather is:'
-                document.getElementById('temp').innerHTML ='Temp: ' + data.currently.temperature + '°F'
-                document.getElementById('hum').innerHTML = 'Humidity: ' + data.currently.humidity
-                document.getElementById('cloud').innerHTML = 'Clouds: ' + data.currently.cloudCover
-            } else if (days>7) {
-                document.getElementById('weather').innerHTML = 'Typical weather for then is:'
-                document.getElementById('temp').innerHTML ='Temp: ' + data.currently.temperature + '°F'
-                document.getElementById('hum').innerHTML = 'Humidity: ' + data.currently.humidity
-                document.getElementById('cloud').innerHTML = 'Clouds: ' + data.currently.cloudCover
-            }
-           
+            const latitude = data.postalCodes[0].lat;
+            const longitude = data.postalCodes[0].lng;
+            getCityWeather('http://localhost:8081/trip/weather', data = { url: darkSkyUrl + darkSkyKey + latitude + ',' + longitude + ',' + tripDate / 1000 })
+                .then(function (data) {
+                    document.getElementById('days').innerHTML = city + ',' + ' is ' + days + ' days away'
+                    if (days <= 7) {
+                        document.getElementById('weather').innerHTML = 'The weather is:'
+                        document.getElementById('temp').innerHTML = 'Temp: ' + data.currently.temperature + '°F'
+                        document.getElementById('hum').innerHTML = 'Humidity: ' + data.currently.humidity
+                        document.getElementById('cloud').innerHTML = 'Clouds: ' + data.currently.cloudCover
+                    } else if (days > 7) {
+                        document.getElementById('weather').innerHTML = 'Typical weather for then is:'
+                        document.getElementById('temp').innerHTML = 'Temp: ' + data.currently.temperature + '°F'
+                        document.getElementById('hum').innerHTML = 'Humidity: ' + data.currently.humidity
+                        document.getElementById('cloud').innerHTML = 'Clouds: ' + data.currently.cloudCover
+                    }
+
+                    getImage('http://localhost:8081/trip/weather/image', data = { url: pixabayUrl + pixabayKey + '&q=' + city + '&image_type=photo' })
+                        .then(function (data) {
+                            let section = document.getElementById('info')
+                            let newImg = document.createElement('img')
+                            newImg.setAttribute('src', data.hits[0].webformatURL)
+                            section.appendChild(newImg)
+                        })
+
+
+                })
         })
-        })
-       
-        
+
+
 }
 const getCityInfo = async (baseURL, city, userName) => {
     const res = await fetch(baseURL + city + userName)
@@ -80,6 +93,27 @@ const getCityWeather = async (url = '', data = {}) => {
     }
 }
 
+const getImage = async (url = '', data = {}) => {
+    console.log(data);
+    const response = await fetch(url, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+
+    try {
+        const newData = await response.json();
+        console.log(newData);
+        return newData;
+    } catch (error) {
+        console.log("error", error);
+    }
+}
 
 
-export {performAction};
+
+
+export { performAction };

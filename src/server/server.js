@@ -36,17 +36,31 @@ app.use((req, res, next) => {
 });
 
 app.post('/trip/weather', (req, res) => {
-    console.log(req.body)
     request(
         { url: req.body.url },
         (error, response, body) => {
             if (error || response.statusCode !== 200) {
-                return res.status(500).json({ type: 'error', message: err.message });
+                return res.status(500).json({ type: 'error', message: error.message });
             }
             res.json(JSON.parse(body));
         }
     )
 });
+
+app.post ('/trip/weather/image', (req, res) => {
+    console.log(req.body)
+    request(
+        { url: req.body.url },
+        (error, response, body) => {
+            if (error || response.statusCode !== 200) {
+                return res.status(500).json({ type: 'error', message: error.message });
+            }
+            res.json(JSON.parse(body));
+        }
+    )
+});
+
+
 
 app.get('/allEntries', sendData)
 
