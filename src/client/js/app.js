@@ -3,8 +3,10 @@ let baseURL = 'http://api.geonames.org/postalCodeSearchJSON?placename=';
 let userName = '&username=tringa';
 let darkSkyUrl = 'https://api.darksky.net/forecast/';
 let darkSkyKey = '13906ff7d642fd620e83783e917d200f/';
-let pixabayUrl = 'https://pixabay.com/api/'
-let pixabayKey = '?key=15825235-241d1f472909d09f4e952d861'
+let pixabayUrl = 'https://pixabay.com/api/';
+let pixabayKey = '?key=15825235-241d1f472909d09f4e952d861';
+let restCountryUrl = 'https://restcountries.eu/rest/v2/alpha/';
+
 
 
 
@@ -15,21 +17,28 @@ document.getElementById('search').addEventListener('click', performAction);
 
 
 function performAction(e) {
+    const imgSection = document.getElementById('destination-photo');
+    if (imgSection.innerHTML == "") {
+        getTripInfo()
+    } else {
+        imgSection.firstElementChild.remove()
+        getTripInfo()
+    }
+}
 
+function getTripInfo() {
     const city = document.getElementById('city').value;
-    const date = document.getElementById('departing-date').value
-    const tripDate = new Date(date).getTime();
-    console.log(tripDate);
-    const now = new Date().getTime();
-    const t = tripDate - now;
-    const days = Math.floor(t / (1000 * 60 * 60 * 24)) + 1;
-    console.log(days);
+    const tripDate = new Date(document.getElementById('departing-date').value).getTime();
+    const days = Client.daysCountdown(tripDate);
+    
 
-
-
+  
 
     getCityInfo(baseURL, city, userName)
         .then(function (data) {
+            console.log(data)
+            const countryCode = data.postalCodes[0].countryCode;
+            console.log(countryCode)
             const latitude = data.postalCodes[0].lat;
             const longitude = data.postalCodes[0].lng;
             getCityWeather('http://localhost:8081/trip/weather', data = { url: darkSkyUrl + darkSkyKey + latitude + ',' + longitude + ',' + tripDate / 1000 })
@@ -49,10 +58,21 @@ function performAction(e) {
 
                     getImage('http://localhost:8081/trip/weather/image', data = { url: pixabayUrl + pixabayKey + '&q=' + city + '&image_type=photo' })
                         .then(function (data) {
-                            let section = document.getElementById('info')
+                            const imgSection = document.getElementById('destination-photo')
                             let newImg = document.createElement('img')
                             newImg.setAttribute('src', data.hits[0].webformatURL)
-                            section.appendChild(newImg)
+                            newImg.setAttribute('id', 'api-photo')
+                            imgSection.appendChild(newImg)
+                            getCountryData(restCountryUrl,countryCode)
+                            .then(function(data) {
+                                console.log(data)
+                                document.getElementById('country').innerHTML= 'Country: ' + data.name
+                                document.getElementById('capital').innerHTML= 'Capital: ' + data.capital
+                                document.getElementById('region').innerHTML= 'Region: ' + data.region
+                                document.getElementById('language').innerHTML = 'Language: ' + data.languages[0].name
+                                document.getElementById('currencie').innerHTML = 'Currencie: ' + data.currencies[0].code
+                            })
+
                         })
 
 
@@ -61,6 +81,7 @@ function performAction(e) {
 
 
 }
+
 const getCityInfo = async (baseURL, city, userName) => {
     const res = await fetch(baseURL + city + userName)
     try {
@@ -110,6 +131,17 @@ const getImage = async (url = '', data = {}) => {
         return newData;
     } catch (error) {
         console.log("error", error);
+    }
+}
+
+const getCountryData = async (restCountryUrl, countryCode) => {
+    const res = await fetch(restCountryUrl + countryCode)
+    try {
+        const data = await res.json();
+        console.log(data)
+        return data;
+    } catch (error) {
+        console.log('error', error)
     }
 }
 
