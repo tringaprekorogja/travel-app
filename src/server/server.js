@@ -35,6 +35,7 @@ app.use((req, res, next) => {
     next();
 });
 
+
 app.post('/trip/weather', (req, res) => {
     request(
         { url: req.body.url },
@@ -62,25 +63,9 @@ app.post ('/trip/weather/image', (req, res) => {
 
 
 
-app.get('/allEntries', sendData)
-
-function sendData(request, response) {
-    response.send(projectData);
-};
 
 
-app.post('/addNewEntry', postData);
 
 
-function postData(request, respond) {
 
-    projectData = {
 
-        Country: request.body.Country,
-        Latitude: request.body.Latitude,
-        Longitude: request.body.Longitude,
-    }
-
-    console.log('data is ' + projectData)
-    respond.send(projectData)
-}
