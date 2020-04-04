@@ -1,5 +1,5 @@
 import {performAction} from './js/app'
-import {daysCountdown} from './js/test'
+import {daysCountdown} from './js/daysCountdown'
 
 
 import './styles/style.scss'
