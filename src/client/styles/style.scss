@@ -17,6 +17,32 @@ body{
     "d d d"
     "photo photo photo";
 }
+
+@media (max-width:375px) {
+    body{
+        background: #fffff8;  
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        display: grid;
+        grid-template-columns:1fr;
+        grid-auto-rows: minmax(40px, auto);
+        grid-template-areas:
+        "hd"
+        "city"
+        "date"
+        "search"
+        "img"
+        "travel"
+        "cd"
+        "d";        
+}
+   
+   
+
+}
+
+
+
+
 div {
     grid-area:d;
 }

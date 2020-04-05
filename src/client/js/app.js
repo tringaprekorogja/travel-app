@@ -1,4 +1,5 @@
 /* Global Variables */
+module.exports = server
 let baseURL = 'http://api.geonames.org/postalCodeSearchJSON?placename=';
 let userName = '&username=tringa';
 let darkSkyUrl = 'https://api.darksky.net/forecast/';
