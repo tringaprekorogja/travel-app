@@ -1,164 +1,182 @@
 $border-color: 1px solid #3498db;
 
-body{
-    padding: 60px;
-    background: #fffff8;  
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    display: grid;
-    grid-template-columns:1fr 1fr 1fr;
-    grid-auto-rows: minmax(1fr, auto);
-    grid-row-gap:30px;
-    grid-template-areas: 
-    "hd hd hd"
-    " . city img"
-    " . date img"
-    " . search cd"
-    " . travel cd "
-    "d d d"
-    "photo photo photo";
+body {
+	padding: 60px;
+	background: #fffff8;
+	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-auto-rows: minmax(1fr, auto);
+	grid-row-gap: 30px;
+	grid-template-areas:
+		"hd hd hd"
+		" . city img"
+		" . date img"
+		" . search cd"
+		" . travel cd "
+		"d d d"
+		"photo photo photo";
 }
-
-@media (max-width:375px) {
-    body{
-        background: #fffff8;  
-        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-        display: grid;
-        grid-template-columns:1fr;
-        grid-auto-rows: minmax(40px, auto);
-        grid-template-areas:
-        "hd"
-        "city"
-        "date"
-        "search"
-        "img"
-        "travel"
-        "cd"
-        "d";        
-}
-   
-   
-
-}
-
-
-
 
 div {
-    grid-area:d;
+	grid-area: d;
 }
- 
+
 #country-data {
-    grid-area:cd;
+	grid-area: cd;
 }
-header{
-    grid-area:hd;
-    text-align: center;
-    font-size: 50px;
-    border: $border-color;
-    background-color: moccasin;
-    color:white;
+header {
+	grid-area: hd;
+	text-align: center;
+	font-size: 50px;
+	border: $border-color;
+	background-color: moccasin;
+	color: white;
 }
 
 .title {
-    text-align: center;
+	text-align: center;
 }
 
 #departing {
-    grid-area: date;
-    #departing-date {
-       width: 160px;
-       height: 40px;
-    }
+	grid-area: date;
+	#departing-date {
+		width: 160px;
+		height: 40px;
+	}
 }
 #destination-photo {
-    grid-area:img;
-    #api-photo {
-        width:646px;
-        height:246px;
-        border: $border-color;
-    }
+	grid-area: img;
+	#api-photo {
+		width: 646px;
+		height: 246px;
+		border: $border-color;
+	}
 }
-
 
 #destination {
-    grid-area: city;
-    #city {
-       width: 160px;
-       height: 40px;
-    }
+	grid-area: city;
+	#city {
+		width: 160px;
+		height: 40px;
+	}
 }
 #search {
-    grid-area:search;
-    width: 250px ;
-    height: 60px;
-    border:$border-color;
-    font-size: 20px;
-    &:hover{
-        color:white;
-        background-color: darkslategrey;
-    }
+	grid-area: search;
+	width: 250px;
+	height: 60px;
+	border: $border-color;
+	font-size: 20px;
+	&:hover {
+		color: white;
+		background-color: darkslategrey;
+	}
 }
 #travelInfo {
-    grid-area: travel;
+	grid-area: travel;
 }
 
-#mostVisited{
-    grid-area: photo;
-     width:100%;
-    #images {
-        display:flex;
-        justify-content: space-evenly;
-        img {
-            width: 350px;
-            height: 200px;
-            border:$border-color;
-        &:hover {
-            width: 400px;
-            height:220px;
-        }
-            }  
-        }
+#mostVisited {
+	grid-area: photo;
+	width: 100%;
+	#images {
+		display: flex;
+		justify-content: space-evenly;
+		img {
+			width: 350px;
+			height: 200px;
+			border: $border-color;
+			&:hover {
+				width: 400px;
+				height: 220px;
+			}
+		}
+	}
 }
 
+@media (max-width: 600px){
+	body {
+		display: grid;
+		padding: 2px;
+		border: $border-color;
+		grid-gap: 10px;
+		grid-template-columns: 375px;
+		grid-auto-rows: minmax(1fr, auto);
+		grid-template-areas:
+			"hd"
+			"city"
+			"date"
+			"search"
+			"travel"
+			"img"
+			"cd"
+			"d"
+			"photo";
+	}
+	header {
+		width: 350px;
+		font-size: 20px;
+	}
+	#destination-photo {
+		grid-area: img;
+		#api-photo {
+			width: 300px;
+			border: $border-color;
+		}
+	}
+	#mostVisited {
+		grid-area: photo;
+		#images {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-evenly;
+			img {
+				width: 350px;
+				height: 200px;
+				border: $border-color;
+			}
+		}
+	}
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media (max-width:900px) {
-    body{
-        background: #fffff8;  
-        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-        display: grid;
-        grid-template-columns:1fr 1fr;
-        grid-auto-rows: minmax(1fr, auto);
-        grid-row-gap:15px;
-        grid-template-areas: 
-        "hd hd "
-        " city img"
-        " date img"
-        " search cd"
-        " travel cd "
-        "d d d"
-        "photo photo"
-        "photo photo";
+@media (min-width:600px) and (max-width:900px) {
+    body {
+        
+		display: grid;
+		padding: 2px;
+		border: $border-color;
+		grid-gap: 10px;
+		grid-template-columns: 1fr 1fr;
+		grid-auto-rows: minmax(1fr, auto);
+		grid-template-areas:
+			"hd hd"
+			"city img"
+			"date img"
+			"search cd"
+			"travel cd"
+			"d d"
+			"photo photo";
     }
     #destination-photo {
-        grid-area:img;
-        #api-photo {
-            width:300px;
-            height:150px;
-            border:$border-color;
-        }
+		grid-area: img;
+		#api-photo {
+			width: 320px;
+			border: $border-color;
+		}
     }
-    
+    #mostVisited {
+		grid-area: photo;
+		#images {
+            padding-left: 25%;
+            padding-bottom: 10px;
+			display: flex;
+			flex-direction: column;
+            justify-content: space-evenly;
+			img {
+				width: 400px;
+				height: 200px;
+				border: $border-color;
+			}
+		}
+	}
 }
