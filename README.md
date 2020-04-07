@@ -1,9 +1,9 @@
 # Travel-App
 
 ## Project Overview
-About
-To run the project
-Testing
+- About
+- To run the project
+- Testing
 
 ## About
 
@@ -12,16 +12,20 @@ This repo is the code for the project FEND Capstone - Travel App. The project wi
 
 ## To run the project
 
-1.We need to install everything:
+1. We need to install everything:
    npm install
-2.run in development mode:
+2. run in development mode:
    npm run build-dev
-3.Start the server
+3. Start the server
    npm run start
 
 ##  Testing 
 
 To run the test use the command:
    - npm run test
+
+## Extend Options
+
+The extend options which was implemented is the Rest Countries API to pull in data for the country being visited
 
 
