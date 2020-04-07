@@ -9,7 +9,6 @@ let restCountryUrl = 'https://restcountries.eu/rest/v2/alpha/';
 
 
 
-
 const city = document.getElementById('city').value;
 
 
@@ -30,9 +29,9 @@ function getTripInfo() {
     const city = document.getElementById('city').value;
     const tripDate = new Date(document.getElementById('departing-date').value).getTime();
     const days = Client.daysCountdown(tripDate);
-    
 
-  
+
+
 
     getCityInfo(baseURL, city, userName)
         .then(function (data) {
@@ -63,15 +62,15 @@ function getTripInfo() {
                             newImg.setAttribute('src', data.hits[0].webformatURL)
                             newImg.setAttribute('id', 'api-photo')
                             imgSection.appendChild(newImg)
-                            getCountryData(restCountryUrl,countryCode)
-                            .then(function(data) {
-                                console.log(data)
-                                document.getElementById('country').innerHTML= 'Country: ' + data.name
-                                document.getElementById('capital').innerHTML= 'Capital: ' + data.capital
-                                document.getElementById('region').innerHTML= 'Region: ' + data.region
-                                document.getElementById('language').innerHTML = 'Language: ' + data.languages[0].name
-                                document.getElementById('currencie').innerHTML = 'Currencie: ' + data.currencies[0].code
-                            })
+                            getCountryData(restCountryUrl, countryCode)
+                                .then(function (data) {
+                                    console.log(data)
+                                    document.getElementById('country').innerHTML = 'Country: ' + data.name
+                                    document.getElementById('capital').innerHTML = 'Capital: ' + data.capital
+                                    document.getElementById('region').innerHTML = 'Region: ' + data.region
+                                    document.getElementById('language').innerHTML = 'Language: ' + data.languages[0].name
+                                    document.getElementById('currencie').innerHTML = 'Currencie: ' + data.currencies[0].code
+                                })
 
                         })
 

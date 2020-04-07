@@ -1,10 +1,27 @@
 # Travel-App
 
-## Overview
-This project requires you to create an asynchronous web app that uses Web API and user data to dynamically update the UI. 
+## Project Overview
+About
+To run the project
+Testing
 
-## Instructions
-This will require modifying the `server.js` file and the `website/app.js` file. You can see `index.html` for element references, and once you are finished with the project steps, you can use `style.css` to style your application to customized perfection.
+## About
 
-## Extras
-If you are interested in testing your code as you go, you can use `tests.js` as a template for writing and running some basic tests for your code.
+This repo is the code for the project FEND Capstone - Travel App. The project will include a simple form where you enter the location you are traveling to and the date you are leaving. If the trip is within a week, you will get the current weather forecast. If the trip is in the future, you will get a predicted forecast. It contains webpack configurations, express server which connect to 3 different 3-Party-APIs to get the necessary data. 
+ 
+
+## To run the project
+
+1.We need to install everything:
+   npm install
+2.run in development mode:
+   npm run build-dev
+3.Start the server
+   npm run start
+
+##  Testing 
+
+To run the test use the command:
+   - npm run test
+
+

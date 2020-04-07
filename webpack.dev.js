@@ -1,11 +1,15 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 
 module.exports = {
     mode:'production',
     entry: './src/client/index.js',
+    node: {
+        fs: 'empty'
+      },
     output: {
        libraryTarget:'var',
        library: 'Client'
@@ -34,7 +38,8 @@ module.exports = {
                     outputPath: 'imgs'
 
                 }
-            }
+            },
+            
             
 
         ]
@@ -44,6 +49,7 @@ module.exports = {
             template:'./src/client/views/index.html',
             filename:'./index.html'
         })
+       
     ]
 
 };
