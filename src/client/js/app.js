@@ -8,13 +8,10 @@ let pixabayKey = '?key=15825235-241d1f472909d09f4e952d861';
 let restCountryUrl = 'https://restcountries.eu/rest/v2/alpha/';
 
 
-
-const city = document.getElementById('city').value;
-
-
+/* Add event listener */
 document.getElementById('search').addEventListener('click', performAction);
 
-
+/* Event listener handleer */
 function performAction(e) {
     const imgSection = document.getElementById('destination-photo');
     if (imgSection.innerHTML == "") {
@@ -24,15 +21,16 @@ function performAction(e) {
         getTripInfo()
     }
 }
-
+/* Main function */
 function getTripInfo() {
     const city = document.getElementById('city').value;
     const tripDate = new Date(document.getElementById('departing-date').value).getTime();
+    /*Calls the function which calculates how soon the trip is */
     const days = Client.daysCountdown(tripDate);
 
 
 
-
+    /* Gets data related to the provided city*/
     getCityInfo(baseURL, city, userName)
         .then(function (data) {
             console.log(data)
@@ -40,6 +38,7 @@ function getTripInfo() {
             console.log(countryCode)
             const latitude = data.postalCodes[0].lat;
             const longitude = data.postalCodes[0].lng;
+            /* Gets the weather data for the given lat and long */
             getCityWeather('http://localhost:8081/trip/weather', data = { url: darkSkyUrl + darkSkyKey + latitude + ',' + longitude + ',' + tripDate / 1000 })
                 .then(function (data) {
                     document.getElementById('days').innerHTML = city + ',' + ' is ' + days + ' days away'
@@ -54,7 +53,7 @@ function getTripInfo() {
                         document.getElementById('hum').innerHTML = 'Humidity: ' + data.currently.humidity
                         document.getElementById('cloud').innerHTML = 'Clouds: ' + data.currently.cloudCover
                     }
-
+                    /* Gets the image for the city being visited */
                     getImage('http://localhost:8081/trip/weather/image', data = { url: pixabayUrl + pixabayKey + '&q=' + city + '&image_type=photo' })
                         .then(function (data) {
                             const imgSection = document.getElementById('destination-photo')
@@ -62,6 +61,7 @@ function getTripInfo() {
                             newImg.setAttribute('src', data.hits[0].webformatURL)
                             newImg.setAttribute('id', 'api-photo')
                             imgSection.appendChild(newImg)
+                            /* Gets the data of the County for the City being visited */
                             getCountryData(restCountryUrl, countryCode)
                                 .then(function (data) {
                                     console.log(data)

@@ -1,3 +1,5 @@
+/*Calcultes how soon is the trip*/
+
 function daysCountdown (tripDate) {
     const now = new Date().getTime();
     const t = tripDate - now;

@@ -1,5 +1,3 @@
-// Setup empty JS object to act as endpoint for all routes
-
 
 // Require Express to run server and routes
 const express = require('express');
@@ -30,6 +28,7 @@ function listening() {
     // console.log(`running on localhost: ${port}`);
 };
 
+// Creates a proxy server
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     next();
@@ -47,8 +46,8 @@ app.post('/trip/weather', (req, res) => {
         }
     )
 });
-
-app.post ('/trip/weather/image', (req, res) => {
+// C
+app.post('/trip/weather/image', (req, res) => {
     console.log(req.body)
     request(
         { url: req.body.url },
